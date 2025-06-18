@@ -1,4 +1,7 @@
 ﻿
+using System.Runtime.InteropServices;
+using ClickableTransparentOverlay;
+
 namespace norecoil {    public class Program : Overlay
     {
         private bool _showMenu = false;
