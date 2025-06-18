@@ -43,6 +43,12 @@
 - .NET 9.0 Runtime (included in self-contained build)
 - Running as administrator is recommended for input simulation
 
+### Using Installer
+- Download [No Recoil R6 Installer](https://github.com/Halqq/NoRecoil-Macro/releases)
+- Run as Administrator 
+- This will create a desktop shortcut 
+- Run Shortcut and enjoy!
+
 ---
 
 ## 💻 How to Use

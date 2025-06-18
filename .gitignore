@@ -31,6 +31,9 @@ bld/
 *.userosscache
 *.sln.docstates
 
+# Installer
+ConsoleApp1
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
