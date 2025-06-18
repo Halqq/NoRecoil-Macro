@@ -9,13 +9,15 @@
 
 **Built for players: customize Rainbow Six Siege recoil your way!**
 
-[Features](#-features) • [Installation](#-installation) • [How to Use](#-how-to-use) • [Configuration](#-configuration) • [Contributing](#-contributing)
+[Features](#-features) • [Installation](#-installation) • [How to Use](#-how-to-use) • [Configuration](#-configuration) 
 
 </div>
 
 ---
 
 ## 🌟 Features
+
+![alt text](image.png)
 
 ### 🎮 **Per-Operator Recoil Customization**
 - 35 attackers and 33 defenders, each with their own settings
@@ -53,13 +55,6 @@
    - **Left/Right Force**: Compensates horizontal recoil
 5. Enable the macro and have fun!
 
-### Controls
-
-| Key | Action |
-|-----|--------|
-| Right Shift | Open/close menu |
-| Left Mouse Button | Apply recoil (if enabled) |
-| Right Mouse Button | Apply recoil (if enabled) |
 
 ### Supported Operators
 
@@ -167,33 +162,6 @@ This app only uses standard Windows APIs. It does NOT:
 
 ---
 
-## Contributing
-
-Want to help? Go for it!
-
-1. Fork the repo
-2. Clone your fork
-3. Create a branch for your idea
-4. Make your changes
-5. Test thoroughly
-6. Open a pull request
-
-### Contribution Tips
-
-- Follow C# code standards
-- Test new features
-- Update documentation
-- Handle errors properly
-
-Ideas for contributions:
-- New operators
-- UI improvements
-- Performance tweaks
-- Mobile app
-- Translations
-
----
-
 ## 📄 License
 
 MIT – see the [LICENSE](LICENSE) file for details.
@@ -202,7 +170,6 @@ MIT – see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
 
-Made with ❤️ by Halq!
 
 ⭐ If you like it, leave a star!
 
