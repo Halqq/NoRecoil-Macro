@@ -53,7 +53,8 @@
 4. Adjust recoil values with the sliders:
    - **Down Force**: Compensates vertical recoil
    - **Left/Right Force**: Compensates horizontal recoil
-5. Enable the macro and have fun!
+5. Press Left and Right mouse buttons and have macro working!
+6. Enable the macro and have fun!
 
 
 ### Supported Operators
