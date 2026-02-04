@@ -1,9 +1,13 @@
-﻿
+﻿// [] add in all operators
+// [] add in all weapons
+// [] make it to where all operator configs are applied at once
+// [] make a window exit icon
+
 using System.Runtime.InteropServices;
 using ClickableTransparentOverlay;
 
-namespace norecoil {    public class Program : Overlay
-    {
+namespace norecoil {    
+    public class Program : Overlay {
         private bool _showMenu = false;
         
         [DllImport("user32.dll")]
@@ -25,24 +29,26 @@ namespace norecoil {    public class Program : Overlay
         private bool _macroEnabled = false;
         
         private string[] _attackers = {
-            "Sledge", "Thatcher", "Ash", "Thermite", "Twitch", "Montagne", "Glaz", "Fuze", "IQ", "Blitz",
-            "Buck", "Blackbeard", "Capitão", "Hibana", "Jackal", "Ying", "Zofia", "Dokkaebi", "Lion",
-            "Finka", "Maverick", "Nomad", "Gridlock", "Nokk", "Amaru", "Kali", "Iana", "Ace", "Zero",
-            "Flores", "Osa", "Sens", "Grim", "Brava", "Ram"
+            "Ace", "Amaru", "Ash", "Blackbeard", "Blitz", "Brava", "Buck", "Capitão", "Deimos", "Dokkaebi", "Finka",
+            "Flores", "Fuze", "Glaz", "Gridlock", "Grim", "Hibana", "Iana", "IQ", "Jackal", "Kali",
+            "Lion", "Maverick", "Montagne", "Nokk", "Nomad", "Osa", "Ram", "Rauora", "Sens", "Sledge", "Striker", "Thatcher",
+            "Thermite", "Twitch", "Ying", "Zero", "Zofia"
         };
-        
+
         private string[] _defenders = {
-            "Smoke", "Mute", "Castle", "Pulse", "Doc", "Rook", "Kapkan", "Tachanka", "Jäger", "Bandit",
-            "Frost", "Valkyrie", "Caveira", "Echo", "Mira", "Lesion", "Ela", "Vigil", "Maestro", "Alibi",
-            "Clash", "Kaid", "Mozzie", "Warden", "Goyo", "Wamai", "Oryx", "Melusi", "Aruni", "Thunderbird",
-            "Thorn", "Azami", "Solis", "Fenrir", "Tubarão"        };
+            "Alibi", "Aruni", "Azami", "Bandit", "Капkan", "Castle", "Caveira", "Clash", "Doc", "Denari", "Echo",
+            "Ela", "Fenrir", "Frost", "Goyo", "Jäger", "Kaid", "Lesion", "Maestro", "Melusi", "Mira",
+            "Mozzie", "Mute", "Oryx", "Pulse", "Rook", "Sentry", "Skopós", "Smoke", "Solis", "Tachanka", "Thorn", "Thunderbird",
+            "Tubarão", "Valkyrie", "Vigil", "Wamai", "Warden"
+        };
         
         private int _selectedAttacker = 0;
         private int _selectedDefender = 0;
         
         private int _lastSelectedAttacker = -1;
         private int _lastSelectedDefender = -1;
-        private bool _usingAttacker = true; 
+        private bool _usingAttacker = true;
+
 
         public Program()
         {
@@ -72,9 +78,9 @@ namespace norecoil {    public class Program : Overlay
                 
                 if (attackerClicked)
                 {
-#if DEBUG
+                #if DEBUG
                     Console.WriteLine($"Clique detectado em atacante: {_attackers[newSelectedAttacker]}");
-#endif
+                #endif
                     if (newSelectedAttacker != _selectedAttacker)
                     {
                         SaveCurrentOperatorConfig();
@@ -83,15 +89,21 @@ namespace norecoil {    public class Program : Overlay
                     _selectedAttacker = newSelectedAttacker;
                     _usingAttacker = true;
 
+                    string currentOperator = _attackers[_selectedAttacker];
+
+                    if (currentOperator == "Twitch"){
+                        _mouseMover.MoveMouseWithForce(_recoilDownForce * 4.2392, _recoilLeftForce, _recoilRightForce);
+                    }
+
                     LoadCurrentOperatorConfig();
                     _configManager.UpdateSelectedOperators(_selectedAttacker, _selectedDefender);
                 }
                 
                 if (defenderClicked)
                 {
-#if DEBUG
+                #if DEBUG
                     Console.WriteLine($"Clique detectado em defensor: {_defenders[newSelectedDefender]}");
-#endif
+                #endif
                     if (newSelectedDefender != _selectedDefender)
                     {
                         SaveCurrentOperatorConfig();
@@ -103,7 +115,9 @@ namespace norecoil {    public class Program : Overlay
                     LoadCurrentOperatorConfig();
                     _configManager.UpdateSelectedOperators(_selectedAttacker, _selectedDefender);                }
             }
-        }        private void CheckKeyBinds()
+        }        
+
+        private void CheckKeyBinds()
         {
             if (_keyManager.CheckForKeyBinding())
             {
@@ -119,8 +133,10 @@ namespace norecoil {    public class Program : Overlay
             {
                 _macroEnabled = !_macroEnabled;
                 _configManager.UpdateMacroEnabled(_macroEnabled);
-            }        }
-          private void CheckMouseButtons()
+            }        
+        }
+
+        private void CheckMouseButtons()
         {
             if (!_macroEnabled)
                 return;
@@ -147,10 +163,10 @@ namespace norecoil {    public class Program : Overlay
             _selectedAttacker = macroConfig.SelectedAttacker;
             _selectedDefender = macroConfig.SelectedDefender;
             
-#if DEBUG
+        #if DEBUG
             Console.WriteLine($"Configurações carregadas - Cor: R={_guiManager.GuiColor.X}, G={_guiManager.GuiColor.Y}, B={_guiManager.GuiColor.Z}");
             Console.WriteLine($"Keybinds carregados - GUI: {_keyManager.ToggleGuiKey}, Macro: {_keyManager.ToggleMacroKey}");
-#endif
+        #endif
             
             LoadCurrentOperatorConfig();
         }
@@ -177,9 +193,9 @@ namespace norecoil {    public class Program : Overlay
             _recoilLeftForce = config.RecoilLeftForce;
             _recoilRightForce = config.RecoilRightForce;
             
-#if DEBUG
+        #if DEBUG
             Console.WriteLine($"Carregando configuração: {operatorName} ({(isAttacker ? "Atacante" : "Defensor")}) - Down:{_recoilDownForce}, Left:{_recoilLeftForce}, Right:{_recoilRightForce}");
-#endif
+        #endif
         }
 
         private void SaveCurrentOperatorConfig()
@@ -198,9 +214,9 @@ namespace norecoil {    public class Program : Overlay
                 isAttacker = false;
             }
             
-#if DEBUG
+        #if DEBUG
             Console.WriteLine($"Salvando configuração: {operatorName} ({(isAttacker ? "Atacante" : "Defensor")}) - Down:{_recoilDownForce}, Left:{_recoilLeftForce}, Right:{_recoilRightForce}");
-#endif
+        #endif
             _configManager.UpdateOperatorConfig(operatorName, isAttacker, _recoilDownForce, _recoilLeftForce, _recoilRightForce);
         }        private void CheckOperatorChanges()
         {
@@ -214,9 +230,9 @@ namespace norecoil {    public class Program : Overlay
 
         public static void Main(string[] args)
         {
-#if DEBUG
+        #if DEBUG
             Console.WriteLine("No Recoil Overlay started");
-#endif
+        #endif
             
             Program p = new Program();
             p.Start().Wait();

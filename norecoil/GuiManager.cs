@@ -22,15 +22,18 @@ public class GuiManager
         
         _guiColor = _configManager.GetGuiColor();
     }
-      public Vector3 GuiColor 
+    
+    public Vector3 GuiColor 
     { 
         get => _guiColor; 
         set => _guiColor = value; 
     }
-      public void RenderMainMenu(bool macroEnabled, int selectedAttacker, int selectedDefender, bool usingAttacker,
+    
+    public void RenderMainMenu(bool macroEnabled, int selectedAttacker, int selectedDefender, bool usingAttacker,
         ref int recoilDownForce, ref int recoilLeftForce, ref int recoilRightForce,
         out bool attackerClicked, out int newSelectedAttacker,
-        out bool defenderClicked, out int newSelectedDefender)
+        out bool defenderClicked, out int newSelectedDefender) 
+
     {
         attackerClicked = false;
         defenderClicked = false;
@@ -38,13 +41,17 @@ public class GuiManager
         newSelectedDefender = selectedDefender;
         
         ApplyColorTheme();
+       
+        Array.Sort(_attackers);
+        Array.Sort(_defenders);
+
+        ImGui.SetNextWindowPos(new Vector2(10, 10));
         
-        ImGui.SetNextWindowPos(new Vector2(10, 10), ImGuiCond.Always);
-        
-        ImGui.SetNextWindowSize(new Vector2(1000, 500), ImGuiCond.Always);
+        ImGui.SetNextWindowSize(new Vector2(1000, 500));
         
         bool showMenu = true;
-        if (ImGui.Begin("No Recoil Control", ref showMenu, ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize))
+
+        if (ImGui.Begin("No Recoil Control", ref showMenu, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.MenuBar))
         {
             if (ImGui.BeginTabBar("MainTabs"))
             {
@@ -64,10 +71,9 @@ public class GuiManager
                 
                 ImGui.EndTabBar();
             }
-            
-            ImGui.End();
         }
-    }
+        ImGui.End();
+    } 
     
     private void RenderMacroTab(bool macroEnabled, int selectedAttacker, int selectedDefender, bool usingAttacker,
         ref int recoilDownForce, ref int recoilLeftForce, ref int recoilRightForce,
@@ -166,7 +172,8 @@ public class GuiManager
         
         ImGui.Columns(1);
     }
-      private void RenderConfigTab()
+    
+    private void RenderConfigTab()
     {
         ImGui.Text("GUI Color:");
         ImGui.SetNextItemWidth(200);
